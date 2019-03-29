@@ -25,7 +25,10 @@ app.set("views", path.resolve(__dirname,"./views"));
 app.set("view engine","ejs");
 
 
-app.use("/",indexRouter);
+app.use("/",(req,res,next)=>{
+    res.set('Cache-Control','no-cache,no-store,must-revalidate')
+    next();
+},indexRouter);
 app.use("/user",userRouter);
 
 

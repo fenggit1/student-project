@@ -1,12 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const UserModel = require('../models/userModel');
 
 router.get("/",(req,res)=>{
     console.log("我是首页")
     if(req.session.nickName){
-        res.render("index",{
-            nickName:req.session.nickName,
-            isAdmin:req.session.isAdmin
+
+        UserModel.find()
+            .then(data=>{
+                res.render("index",{
+                    nickName:req.session.nickName,
+                    isAdmin:req.session.isAdmin,
+                    userList:data
+            })
         });
     }else{
         res.redirect("/login.html")

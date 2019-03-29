@@ -8,6 +8,7 @@
   <link rel="stylesheet/less" href="/css/reset.less">
   <link rel="stylesheet/less" href="/css/common.less">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1110021_bv6rtxt80dt.css">
+  
 </head>
 <body>
 
@@ -16,11 +17,16 @@
       <a href="/" class="logo"><h1>骚猪 - 我的天，你真帅</h1></a>
     </div>
     <div class="lv-header-right">
-      <div class="btn"><i class="iconfont icon-setting"></i></div>
+      <a href="/user/logout" class="btn"><i class="iconfont icon-setting"></i></a>
       <div class="btn"><i class="iconfont icon-edit"></i></div>
       <div class="user">
         <img class="avator" src="./images/avator.png" alt="">
-          <span class="nickname">  bkb </span>
+        <% if(isAdmin){%>
+          <span class="nickname"> <%= nickName%> - 管理员</span>
+        <% }else{%>
+          <span class="nickname"> <%= nickName%> </span>
+        <% }%>
+          
         <i class="iconfont icon-down"></i>
       </div>
     </div>
@@ -57,6 +63,16 @@
         </div>
       </div>
 
+      <table>
+        <% for(var i=0;i < userList.length;i++){ %>
+            <tr>
+              <td><%= userList[i].username %></td>
+              <td><%= userList[i].nickName %></td>
+            </tr>
+        <% }%>
+       
+      </table>
+
       <!-- 分页 -->
       <div class="lv-pagination right">
         <ul>
@@ -75,5 +91,6 @@
 
   <!-- 是不推荐的，只能玩玩 -->
   <script src="/js/less.min.js"></script>
+  <script src="/js/ejs.min.js"></script>
 </body>
 </html>
